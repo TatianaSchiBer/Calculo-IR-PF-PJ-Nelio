@@ -1,0 +1,58 @@
+package entetis;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class IR {
+
+	
+	
+	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		
+		List<Pessoa>list = new ArrayList<>();
+		
+		System.out.print("Informe o numero de contribuintes: ");
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n; i++) {
+			System.out.println("Dados contribuinte # " + i);
+			System.out.print("IRPFisica ou IRPJuridica (f/j): ");
+			sc.nextLine();
+			char type = sc.next().charAt(0);
+			System.out.print("Nome: ");
+			sc.nextLine();
+			String nome = sc.nextLine();
+			System.out.print("Renda Anual: ");
+			double rendAnual = sc.nextDouble();
+			if( type == 'f') {
+				System.out.print("Informe valor de gastos com saude: ");
+				double gastoSaude = sc.nextDouble();
+				list.add(new PessoaFisica (nome, rendAnual,gastoSaude));
+			} else {
+				System.out.print("Informe numero de funcionarios da empresa: ");
+				int numeroFunc = sc.nextInt();
+				list.add(new PessoaJuridica(nome, rendAnual, numeroFunc));
+			}
+			
+		}
+		double soma = 0.0;
+		System.out.println();
+		System.out.println("Impostos pagos: ");
+		for (Pessoa pessoa : list) {
+			double imposto = pessoa.calculoIR();
+			System.out.printf("%s pagara imposto de R$ %.2f\n", pessoa.getNome(),imposto );
+			soma += imposto;
+		}
+		System.out.println();
+		System.out.printf("Soma de imposto pago por todos os contribuintes foi de R$ %.2f",soma);
+		
+		
+		sc.close();
+	}
+
+}

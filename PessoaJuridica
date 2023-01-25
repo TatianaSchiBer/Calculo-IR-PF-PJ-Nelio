@@ -1,0 +1,41 @@
+package entetis;
+
+public class PessoaJuridica extends Pessoa {
+	
+	private int numFuncionarios;
+
+
+	public PessoaJuridica(String nome, double rendAnual, int numFuncionarios) {
+		super(nome, rendAnual);
+		this.numFuncionarios = numFuncionarios;
+	}
+
+	
+
+	public int getNumFuncionarios() {
+		return numFuncionarios;
+	}
+
+
+
+	public void setNumFuncionarios(int numFuncionarios) {
+		this.numFuncionarios = numFuncionarios;
+	}
+
+
+
+	@Override
+	public double calculoIR() {
+		if(getNumFuncionarios()<10) {
+			return getRendAnual()* 0.16;
+		}else {
+			return getRendAnual()* 0.14;
+		}
+			
+	}
+	
+	
+	
+	
+
+}
